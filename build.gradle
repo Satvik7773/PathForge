@@ -18,11 +18,27 @@ repositories {
 }
 
 dependencies {
+    // JDBC and H2 database dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'com.h2database:h2'
+
+    // Web-related dependencies
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Boot DevTools (for development)
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Additional dependencies
+    implementation 'org.springframework.boot:spring-boot-starter'
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Test dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
+
+
 
 tasks.named('test') {
     useJUnitPlatform()
