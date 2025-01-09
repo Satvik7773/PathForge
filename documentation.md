@@ -1,0 +1,14 @@
+ObjectMapper => is a powerful utility to handle JSON serialization and deserialization in Java. It converts Java objects into JSON and vice versa.
+
+JSON serialization and deserialization =>  are processes that convert data into a format that can be stored or transmitted, and then back into its original format:
+Serialization: Converts an object's state, or the values of its properties, into a format that can be stored or transmitted.
+Deserialization: Reconstructs an object from the serialized form.
+
+Nested Object Deserialization => To explain further, if you have a complex object structure where some fields themselves are JSON (or strings that represent JSON), you would need to deserialize them as well to convert them back to objects. The more deeply nested the objects are, the more times you'll need to perform the deserialization process.
+
+printStackTrace => e: This represents the exception object that was thrown. In your case, it's an instance of some exception class, such as IOException or JsonProcessingException. The e object contains information about the exception, such as the type of exception and the stack trace (which provides details about where the exception occurred).
+printStackTrace(): This method is called on the exception object e. It prints the stack trace of the exception to the standard error stream (usually the console or terminal). The stack trace contains information about:
+The class and method where the exception occurred.
+The line number in the source code where the exception was thrown.
+The sequence of method calls that led to the exception (the call stack).
+

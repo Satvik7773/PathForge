@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Run (
 
 -- Created the Jobs Section Schema
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
        id UUID PRIMARY KEY,
        username VARCHAR(255) NOT NULL,
        email VARCHAR(255) UNIQUE NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE users (
        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE jobs (
+CREATE TABLE IF NOT EXISTS jobs (
       id UUID PRIMARY KEY,
       title VARCHAR(255) NOT NULL,
       description TEXT NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE jobs (
       is_active BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE tags (
+CREATE TABLE IF NOT EXISTS tags (
       id UUID PRIMARY KEY,
       tag_name VARCHAR(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE applications (
+CREATE TABLE IF NOT EXISTS applications (
       id UUID PRIMARY KEY,
       user_id UUID REFERENCES users(id) ON DELETE CASCADE,
       job_id UUID REFERENCES jobs(id) ON DELETE CASCADE,
@@ -47,7 +47,7 @@ CREATE TABLE applications (
       applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE preparation_material (
+CREATE TABLE IF not exists preparation_material (
       id UUID PRIMARY KEY,
       job_id UUID REFERENCES jobs(id) ON DELETE CASCADE,
       content_type VARCHAR(50) NOT NULL CHECK (content_type IN ('Interview Questions', 'Skills Test', 'Study Material')),
@@ -55,7 +55,7 @@ CREATE TABLE preparation_material (
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE search_logs (
+CREATE TABLE IF NOT EXISTS search_logs (
      id UUID PRIMARY KEY,
      user_id UUID REFERENCES users(id) ON DELETE CASCADE,
      query TEXT NOT NULL,
