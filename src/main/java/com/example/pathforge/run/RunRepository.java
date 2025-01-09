@@ -56,25 +56,4 @@ public class RunRepository {
                 .param(run.getLocation().toString().toUpperCase())  // Bind the location as a string
                 .update();
     }
-
-
-//    @PostConstruct
-//    private void init(){
-//        runs.add(new Run(
-//                1,
-//                "Template",
-//                LocalDateTime.now(),
-//                LocalDateTime.now().plusHours(1),
-//                7,
-//                Location.INDOOR
-//        ));
-//        runs.add(new Run(
-//                2,
-//                "Template",
-//                LocalDateTime.now(),
-//                LocalDateTime.now().plusHours(1),
-//                19,
-//                Location.OUTDOOR
-//        ));
-//    }
 }
