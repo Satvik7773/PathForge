@@ -1,7 +1,5 @@
 package com.example.pathforge.Users;
 
-import com.example.pathforge.run.Run;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,17 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.logging.Logger;
 
 @Repository
 public class UserRepository {
 
     private final JdbcClient jdbcClient;
 
-    public UserRepository(JdbcClient jdbcClient)
-    {
+    public UserRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 
@@ -54,10 +50,34 @@ public class UserRepository {
     };
 
     public List<User> findAllUsers() {
-        // Perform the query and use the custom RowMapper to handle deserialization of the profile field
         return jdbcClient.sql("SELECT * FROM USERS")
                 .query(userRowMapper)
                 .list();
+    }
+
+    public List<User> getUserByUsername(String username, String password) {
+        try {
+            List<User> users = jdbcClient.sql("SELECT * FROM USERS WHERE username = ?")
+                    .param(1, username)
+                    .query(userRowMapper)
+                    .list();
+
+            if (users.isEmpty()) {
+                return Collections.emptyList(); // Return empty list if no user found
+            }
+
+            // Verify the password
+            User user = users.getFirst();
+            if (!Objects.equals(password, user.getPassword())) {
+                return Collections.emptyList(); // Invalid password
+            }
+
+            return users;
+        } catch (Exception e) {
+            Logger logger = Logger.getLogger(UserRepository.class.getName());
+            logger.severe("Error occurred while fetching user: " + e.getMessage());
+            return Collections.emptyList();
+        }
     }
 
     public void CreateUser(User newUser) {
@@ -70,19 +90,19 @@ public class UserRepository {
             profileJson = objectMapper.writeValueAsString(newUser.getProfile());
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the exception or log it as needed
         }
 
-        // Insert data into the USERS table
+        // Hash the password before storing
+
         jdbcClient.sql("INSERT INTO USERS (id, username, email, password, profile, created_at, updated_at) " +
-                        "VALUES (?, ?, ?, ?, ?::jsonb, ?, ?)")  // Cast profile to jsonb
-                .param(newUser.getId())  // Bind the id
-                .param(newUser.getUsername())  // Bind the username
-                .param(newUser.getEmail())  // Bind the email
-                .param(newUser.getPassword())  // Bind the password
-                .param(profileJson)  // Bind the serialized profile JSON string
-                .param(newUser.getCreatedAt())  // Bind the created_at timestamp
-                .param(newUser.getUpdatedAt())  // Bind the updated_at timestamp
-                .update();  // Perform the update (insert)
+                        "VALUES (?, ?, ?, ?, ?::jsonb, ?, ?)")
+                .param(newUser.getId())
+                .param(newUser.getUsername())
+                .param(newUser.getEmail())
+                .param(newUser.getPassword()) // Store hashed password
+                .param(profileJson)
+                .param(newUser.getCreatedAt())
+                .param(newUser.getUpdatedAt())
+                .update();
     }
 }

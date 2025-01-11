@@ -9,13 +9,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @GetMapping("/get-byusername")
+    public ResponseEntity<?> getUserByUsername(@RequestParam String username, @RequestParam String password) {
+        try {
+            List<User> users = userRepository.getUserByUsername(username, password);
+
+            if (users.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            }
+
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while retrieving user information");
+        }
     }
 
     @GetMapping("/all-user")

@@ -12,3 +12,16 @@ The class and method where the exception occurred.
 The line number in the source code where the exception was thrown.
 The sequence of method calls that led to the exception (the call stack).
 
+logger.severe: => 
+logger.severe is a method provided by the Java Logging API (java.util.logging.Logger) to log messages at the SEVERE level.
+The SEVERE level is used for logging messages that indicate a critical failure in the application, such as an exception or an unrecoverable error.
+
+Password Encoder Article => 
+https://medium.com/@yassir.acaf/deep-dive-in-password-management-in-spring-security-f7b8658d09d2
+
+![img.png](img.png)
+
+
+
+
+
