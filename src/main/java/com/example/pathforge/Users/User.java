@@ -13,33 +13,4 @@ public record User(
         Map<String, Object> profile,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
-) {
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Map<String,Object> getProfile() {
-        return profile;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-}
+) {}

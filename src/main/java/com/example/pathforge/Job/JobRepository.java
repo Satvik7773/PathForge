@@ -1,7 +1,5 @@
 package com.example.pathforge.Job;
 
-import com.example.pathforge.PathForgeApplication;
-import com.example.pathforge.Users.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jdbc.core.RowMapper;
