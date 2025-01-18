@@ -20,7 +20,6 @@ repositories {
 dependencies {
     // JDBC and H2 database dependencies
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    runtimeOnly 'com.h2database:h2'
 
     // Web-related dependencies
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -30,6 +29,7 @@ dependencies {
 
     // Additional dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     runtimeOnly 'org.postgresql:postgresql'
 

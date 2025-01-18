@@ -20,7 +20,7 @@ public class UserRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    private RowMapper<User> userRowMapper = (rs, rowNum) -> {
+    private final RowMapper<User> userRowMapper = (rs, rowNum) -> {
         UUID id = (UUID) rs.getObject("id");
         String username = rs.getString("username");
         String email = rs.getString("email");
@@ -68,7 +68,7 @@ public class UserRepository {
 
             // Verify the password
             User user = users.getFirst();
-            if (!Objects.equals(password, user.getPassword())) {
+            if (!Objects.equals(password, user.password())) {
                 return Collections.emptyList(); // Invalid password
             }
 
@@ -87,7 +87,7 @@ public class UserRepository {
         String profileJson = null;
 
         try {
-            profileJson = objectMapper.writeValueAsString(newUser.getProfile());
+            profileJson = objectMapper.writeValueAsString(newUser.profile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,13 +96,13 @@ public class UserRepository {
 
         jdbcClient.sql("INSERT INTO USERS (id, username, email, password, profile, created_at, updated_at) " +
                         "VALUES (?, ?, ?, ?, ?::jsonb, ?, ?)")
-                .param(newUser.getId())
-                .param(newUser.getUsername())
-                .param(newUser.getEmail())
-                .param(newUser.getPassword()) // Store hashed password
+                .param(newUser.id())
+                .param(newUser.username())
+                .param(newUser.email())
+                .param(newUser.password()) // Store hashed password
                 .param(profileJson)
-                .param(newUser.getCreatedAt())
-                .param(newUser.getUpdatedAt())
+                .param(newUser.createdAt())
+                .param(newUser.updatedAt())
                 .update();
     }
 }

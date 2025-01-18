@@ -1,7 +1,5 @@
 package com.example.pathforge.Job;
 
-import com.example.pathforge.Users.User;
-import com.example.pathforge.Users.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

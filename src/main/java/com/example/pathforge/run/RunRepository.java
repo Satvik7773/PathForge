@@ -1,16 +1,9 @@
 package com.example.pathforge.run;
 
-import jakarta.annotation.PostConstruct;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-
-import static java.time.temporal.ChronoUnit.HOURS;
 
 @Repository
 public class RunRepository {
