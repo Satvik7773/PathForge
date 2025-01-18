@@ -1,7 +1,5 @@
-package com.example.pathforge.Users;
+package com.example.pathforge.User;
 
-import com.example.pathforge.run.Run;
-import com.example.pathforge.run.RunRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +10,18 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/get-byusername")
-    public ResponseEntity<?> getUserByUsername(@RequestParam String username, @RequestParam String password) {
+    @GetMapping("/username")
+    public ResponseEntity<?> getUserByUsername(@RequestParam String username) {
         try {
-            List<User> users = userRepository.getUserByUsername(username, password);
+            Users users = userService.getUserByUsername(username);
 
-            if (users.isEmpty()) {
+            if (users == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
             }
 
@@ -35,14 +33,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/all-user")
-    public List<User> getAllUsers() {
-           return userRepository.findAllUsers();
+    @GetMapping("/alluser")
+    public List<Users> getAllUsers() {
+           return userService.findAllUsers();
     }
 
     @PostMapping("/create-user")
-    public ResponseEntity<String> createUser(@RequestBody User newUser) {
-        userRepository.CreateUser(newUser);
+    public ResponseEntity<String> createUser(@RequestBody Users newUser) {
+        userService.createUser(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body("User Added Successfully");
     }
 }
