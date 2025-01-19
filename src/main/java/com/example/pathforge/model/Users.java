@@ -1,10 +1,9 @@
-package com.example.pathforge.User;
+package com.example.pathforge.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.UUID;
 
 @Entity

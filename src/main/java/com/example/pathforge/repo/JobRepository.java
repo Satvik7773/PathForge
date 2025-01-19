@@ -1,5 +1,6 @@
-package com.example.pathforge.Job;
+package com.example.pathforge.repo;
 
+import com.example.pathforge.model.Job;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jdbc.core.RowMapper;

@@ -1,5 +1,7 @@
-package com.example.pathforge.User;
+package com.example.pathforge.controller;
 
+import com.example.pathforge.service.UserService;
+import com.example.pathforge.model.Users;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
