@@ -15,6 +15,9 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://repo.spring.io/milestone/'
+    }
 }
 
 dependencies {
@@ -36,6 +39,9 @@ dependencies {
     // Spring Security for password encoding and security features
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-crypto:6.1.0'
+
+    // vertex Gemini API Dependency
+    implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter:1.0.0-M5'
 
     // Test dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
