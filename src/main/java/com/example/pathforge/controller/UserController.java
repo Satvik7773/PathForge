@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -42,7 +43,13 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> createUser(@RequestBody Users newUser) {
+        newUser.setUpdatedAt(LocalDateTime.now());
+        newUser.setCreatedAt(LocalDateTime.now());
         userService.register(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body("User Added Successfully");
+    }
+    @PostMapping("/login")
+    public String login(@RequestBody Users user) {
+        return userService.verify(user);
     }
 }
