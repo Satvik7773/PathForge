@@ -24,7 +24,7 @@ public class UserController {
             Users users = userService.getUserByUsername(username);
 
             if (users == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username ");
             }
 
             return ResponseEntity.ok(users);
@@ -35,14 +35,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/alluser")
+    @GetMapping("/all-users")
     public List<Users> getAllUsers() {
            return userService.findAllUsers();
     }
 
-    @PostMapping("/create-user")
+    @PostMapping("/register")
     public ResponseEntity<String> createUser(@RequestBody Users newUser) {
-        userService.createUser(newUser);
+        userService.register(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body("User Added Successfully");
     }
 }
