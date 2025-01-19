@@ -1,4 +1,4 @@
-package com.example.pathforge.Job;
+package com.example.pathforge.model;
 
 import java.time.LocalDateTime;
 import java.util.Map;

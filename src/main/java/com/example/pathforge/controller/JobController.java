@@ -1,5 +1,7 @@
-package com.example.pathforge.Job;
+package com.example.pathforge.controller;
 
+import com.example.pathforge.repo.JobRepository;
+import com.example.pathforge.model.Job;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

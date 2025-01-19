@@ -1,5 +1,7 @@
-package com.example.pathforge.User;
+package com.example.pathforge.service;
 
+import com.example.pathforge.model.Users;
+import com.example.pathforge.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
